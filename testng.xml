@@ -13,10 +13,14 @@
     </test>
     <test verbose="2" preserve-order="true"
           name="C:/Users/Raghavendra/IdeaProjects/ETPtaskModule2/src/test/java/org/example/Module2Task_bTest.java">
+        <parameter name="browser" value="chrome"></parameter>
+        <parameter name="Url" value="https://cloud.google.com/"></parameter>
+
         <classes>
             <class name="org.example.Module2Task_bTest">
                 <methods>
                     <include name="TestingCloud"/>
+                    <include name="VerifyingData"/>
                 </methods>
             </class>
         </classes>
