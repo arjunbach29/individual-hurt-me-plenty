@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/Raghavendra/IdeaProjects/ETPtaskModule2/src/test/java/org/example/Module2Task_aTest.java">
+        <classes>
+            <class name="org.example.Module2Task_aTest">
+                <methods>
+                    <include name="TestingPastebin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="C:/Users/Raghavendra/IdeaProjects/ETPtaskModule2/src/test/java/org/example/Module2Task_bTest.java">
+        <classes>
+            <class name="org.example.Module2Task_bTest">
+                <methods>
+                    <include name="TestingCloud"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
