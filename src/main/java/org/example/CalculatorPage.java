@@ -3,51 +3,82 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class CalculatorPage extends CloudHomePage {
+public class CalculatorPage   {
+    WebDriver driver;
     public CalculatorPage(WebDriver driver) {
-        super(driver);
+        this.driver=driver;
+        PageFactory.initElements(driver,this);
     }
 
-    private By devSiteSearch = By.className("devsite-search-form");
-    private By googleSearch = By.xpath("//input[@class='devsite-search-field devsite-search-query']");
-    private By switchToCalculator = By.xpath("//div[contains(text(),'Pricing calculator')]");
-    private By newFirstFrame = By.xpath("//iframe[contains(@name,'goog_')]");
-    private By instancesField =
-            By.xpath("//md-input-container/child::input[@ng-model='listingCtrl.computeServer.quantity']");
-    private By seriesOfMachine = By.xpath("//md-select[@name='series']/parent::md-input-container");
-    private By seriesOfMachineModel = By.xpath("//md-option[@value='n1']");
-    private By machineType = By.xpath("//label[text()='Machine type']/parent::md-input-container");
-    private By computeEngine = By.xpath("//md-option[@value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8']");
-    private By gpusCheckBox = By.xpath("//md-checkbox[@aria-label='Add GPUs']");
-    private By numberOfGpus = By.xpath("//md-select[@placeholder='Number of GPUs']");
-    private By numberOfGpusModel = By.cssSelector("md-option[value='1'][class='ng-scope md-ink-ripple'][ng-disabled]");
-    private By gpuType = By.xpath("//md-select[@placeholder='GPU type']");
-    private By gpuTypeModel = By.xpath("//md-option[@value='NVIDIA_TESLA_V100']");
-    private By localSsd = By.xpath("//md-select[@placeholder='Local SSD']");
-    private By localSsdModel = By.cssSelector("md-option[value='2'][ng-repeat*='supportedSsd']");
-    private By dataCenterLocation = By.xpath("//md-select[@placeholder='Datacenter location']");
-    private By dataCenterLocationInFrankfurt = By.cssSelector("md-select-menu[class='md-overflow']" +
-            " md-option[value='europe-west3'][ng-repeat*='fullRegionList']");
-    private By committedUsage = By.xpath("//md-select[@placeholder='Committed usage']");
-    private By oneYearUsage = By.cssSelector("div[class='md-select-menu-container md-active md-clickable']" +
-            " md-option[value='1'][class='md-ink-ripple']");
-    private By addToEstimateButton = By.xpath("//button[@aria-label='Add to Estimate']");
-    private By informationInVmClassIsRegular = By.xpath("//div[contains (text(),'VM class: regular')]");
-    private By InformationInInstanceTypeIncludeN1Standard8 =
-            By.xpath("//div[contains (text(),'Instance type: n1-standard-8')]");
-    private By regionIsFrankfurt = By.xpath("//div[contains (text(),'Region: Frankfurt')]");
-    private By localSsdSpace2x375Gib = By.xpath("//div[contains (text(),'Total available local SSD space 2x375 GiB')]");
-    private By commitmentTermOneYear = By.xpath("//div[contains (text(),'Commitment term: 1 Year')]");
+     By devSiteSearch = By.className("devsite-search-form");
+     By googleSearch = By.xpath("//input[@class='devsite-search-field devsite-search-query']");
+     By switchToCalculator = By.xpath("//div[contains(text(),'Pricing calculator')]");
+    @FindBy(xpath ="/html[1]/body[1]/md-content[1]/md-card[1]/div[1]/md-card-content[1]/div[2]/div[1]/md-card[1]/md-card-content[1]/div[1]/div[1]/form[1]/div[1]/div[1]/md-input-container[1]/input[1]")
+    WebElement instancesField;
+    @FindBy(xpath="//iframe[contains(@name,'goog_')]")
+    WebElement newFirstFrame;
+    @FindBy(xpath="//md-select[@name='series']/parent::md-input-container")
+    WebElement seriesOfMachine;
 
+    @FindBy(xpath="//md-option[@id='select_option_212']")
+    WebElement seriesOfMachineModel;
+    @FindBy(xpath="//label[text()='Machine type']/parent::md-input-container")
+    WebElement machineTypeDropBox;
+    @FindBy(xpath="//div[normalize-space()='n1-standard-8 (vCPUs: 8, RAM: 30GB)']")
+    WebElement machineType;
+    @FindBy(xpath="//md-checkbox[@aria-label='Add GPUs']")
+    WebElement gpusCheckBox;
+    @FindBy(xpath="//md-select[@placeholder='GPU type']")
+    WebElement GpuTypeDropBox;
 
-    public void openCloudPage(){
-        driver.get("https://cloud.google.com/");
-    }
+    @FindBy(xpath="//md-select[@placeholder='Number of GPUs']")
+    WebElement numberOfGpusDropBox;
+    @FindBy(xpath ="//md-option[@id='select_option_497']")
+    WebElement numberOfGpus;
+    @FindBy(xpath="//md-option[@value='NVIDIA_TESLA_V100']")
+    WebElement gpusType;
+
+    @FindBy(xpath="//md-select[@placeholder='Local SSD']")
+    WebElement localSsd;
+    @FindBy(xpath="//div[normalize-space()='2x375 GB']")
+    WebElement localSsdModel;
+
+    @FindBy(xpath="//md-select[@placeholder='Datacenter location']")
+    WebElement DataCenterLocationDropBox;
+    @FindBy(xpath="//md-option[@id='select_option_253']//div[@class='md-text ng-binding'][normalize-space()='Frankfurt (europe-west3)']")
+    WebElement DataCenterLocation;
+
+    @FindBy(xpath="//md-select[@placeholder='Committed usage']")
+    WebElement committedUsage;
+    @FindBy(xpath="//md-option[@id='select_option_134']")
+    WebElement oneYearUsage;
+
+    @FindBy(xpath="//form[@name='ComputeEngineForm']//button[@type='button'][normalize-space()='Add to Estimate']")
+    WebElement addToEstimateButton;
+    @FindBy(xpath="//div[normalize-space()='Provisioning model: Regular']")
+    WebElement Vm_Class_Data;
+    @FindBy(xpath="//div[normalize-space()='Region: Frankfurt']")
+    WebElement location;
+
+    @FindBy(xpath="//div[normalize-space()='Commitment term: 1 Year']")
+    WebElement commitedTime;
+
+    @FindBy(xpath="//div[contains (text(),'Instance type: n1-standard-8')]")
+    WebElement instanceData;
+
+    @FindBy(xpath="//div[contains (text(),'Local SSD: 2x375 GiB')]")
+    WebElement ssdData;
+
+    @FindBy(xpath="//b[contains(text(),'Total Estimated Cost:')]")
+    WebElement amount;
+
 
     public void goToGoogleCloudPlatformPricingCalculatorPage(String keyForCalculatorPageOpening) throws InterruptedException {
         driver.findElement(devSiteSearch).click();
@@ -66,74 +97,96 @@ public class CalculatorPage extends CloudHomePage {
     }
 
     public void sendKeyInToNumberOfInstancesField(String keyForNumberOfInstances) {
-        WebElement element = driver.findElement(newFirstFrame);
-        driver.switchTo().frame(element);
+
+        driver.switchTo().frame(newFirstFrame);
         driver.switchTo().frame("myFrame");
-        WebElement numberOfInstancesField = driver.findElement(instancesField);
-        numberOfInstancesField.sendKeys(keyForNumberOfInstances);
+        instancesField.sendKeys(keyForNumberOfInstances);
     }
 
-    public void selectSeriesOfMachine() {
-        driver.findElement(seriesOfMachine).click();
-        driver.findElement(seriesOfMachineModel).click();
+    public void selectSeriesOfMachine() throws InterruptedException {
+        seriesOfMachine.click();
+        Thread.sleep(1000);
+        seriesOfMachineModel.click();
     }
 
-    public void selectMachineType() {
-        driver.findElement(machineType).click();
-        driver.findElement(computeEngine).click();
+    public void selectMachineType() throws InterruptedException {
+        machineTypeDropBox.click();
+        Thread.sleep(1000);
+        machineType.click();
     }
 
     public void clickAddGpusCheckBox() {
-        driver.findElement(gpusCheckBox).click();
+        gpusCheckBox.click();
     }
 
-    public void selectNumberOfGpus() {
-        driver.findElement(numberOfGpus).click();
-        driver.findElement(numberOfGpusModel).click();
+    public void selectGpuType() throws InterruptedException {
+        GpuTypeDropBox.click();
+        Thread.sleep(1000);
+        gpusType.click();
     }
 
-    public void selectGpuType() {
-        driver.findElement(gpuType).click();
-        driver.findElement(gpuTypeModel).click();
+    public void selectNumberOfGpus() throws InterruptedException {
+        numberOfGpusDropBox.click();
+        Thread.sleep(500);
+        numberOfGpus.click();
     }
 
-    public void selectLocalSsd() {
-        driver.findElement(localSsd).click();
-        driver.findElement(localSsdModel).click();
+    public void selectLocalSsd() throws InterruptedException {
+       localSsd.click();
+       Thread.sleep(1000);
+       localSsdModel.click();
     }
 
-    public void selectDataCenterLocation() {
-        driver.findElement(dataCenterLocation).click();
-        driver.findElement(dataCenterLocationInFrankfurt).click();
+    public void selectDataCenterLocation() throws InterruptedException {
+        DataCenterLocationDropBox.click();
+        Thread.sleep(1000);
+        DataCenterLocation.click();
     }
 
-    public void selectCommittedUsage() {
-        driver.findElement(committedUsage).click();
-        driver.findElement(oneYearUsage).click();
+    public void selectCommittedUsage() throws InterruptedException {
+        committedUsage.click();
+        Thread.sleep(1000);
+        oneYearUsage.click();
     }
 
     public void pushAddToEstimate() {
-        driver.findElement(addToEstimateButton).click();
+        addToEstimateButton.click();
     }
 
-    public void checkInformationInVmClassIsRegular(){
-        driver.findElement(informationInVmClassIsRegular);
+
+    public WebElement Get_Vm_Class_Data()
+    {
+        WebElement vmData = Vm_Class_Data;
+        return vmData;
     }
 
-    public void checkInformationInInstanceTypeIncludeN1Standard8(){
-        driver.findElement(InformationInInstanceTypeIncludeN1Standard8);
+    public WebElement Get_Location()
+    {
+        WebElement loc=location;
+        return loc;
     }
 
-    public void checkRegionIsFrankfurt(){
-        driver.findElement(regionIsFrankfurt);
+    public WebElement Get_Commitment(){
+        WebElement time=commitedTime;
+        return time;
     }
 
-    public void checkLocalSsdSpace2x375Gib(){
-        driver.findElement(localSsdSpace2x375Gib);
+
+    public WebElement Get_Instance_Type(){
+        WebElement instance=instanceData;
+        return instance;
     }
 
-    public void checkCommitmentTermOneYear(){
-        driver.findElement(commitmentTermOneYear);
+
+    public WebElement Get_Ssd_Data()
+    {
+        WebElement ssd=ssdData;
+        return ssd;
+    }
+
+    public WebElement Get_Cost(){
+        WebElement price=amount;
+        return price;
     }
 }
 
