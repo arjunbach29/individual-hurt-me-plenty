@@ -15,8 +15,7 @@ public class CalculatorPage extends CloudHomePage {
 
     private By devSiteSearch = By.className("devsite-search-form");
     private By googleSearch = By.xpath("//input[@class='devsite-search-field devsite-search-query']");
-    private By switchToCalculator = By.xpath(
-            "//b[text()='Google Cloud Pricing Calculator']/parent::a");
+    private By switchToCalculator = By.xpath("//div[contains(text(),'Pricing calculator')]");
     private By newFirstFrame = By.xpath("//iframe[contains(@name,'goog_')]");
     private By instancesField =
             By.xpath("//md-input-container/child::input[@ng-model='listingCtrl.computeServer.quantity']");
@@ -61,7 +60,7 @@ public class CalculatorPage extends CloudHomePage {
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath(
                         "//a[contains(text(),'Pricing')]"))));
         searchResult.click();
-        searchResult.findElement(By.xpath("//div[contains(text(),'Pricing calculator')]")).click();
+        searchResult.findElement(switchToCalculator).click();
         Thread.sleep(2000);
 
     }
